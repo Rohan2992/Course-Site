@@ -14,7 +14,7 @@ const NavMenu = () => {
     })
       .then(res => res.json())
       .then(d => {
-        setShowEmail(d.user);
+        setShowEmail(d?.user);
       });
   }, []);
 
@@ -30,7 +30,7 @@ const NavMenu = () => {
       }}
     >
       <Typography variant="h5">Courses-Website</Typography>
-      {showEmail === null
+      {showEmail === null || showEmail === undefined
         ? <div>
             <Link to={"/"}>
               <Button variant="contained">Sign Up</Button>

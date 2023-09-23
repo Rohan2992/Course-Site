@@ -2,8 +2,10 @@ import Card from "@mui/material/Card";
 import { TextField, Typography, Button } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const SignIn = () => {
+  const [userBody, setUserBody] = useState({ username: "", password: "" });
   return (
     <div
       style={{
@@ -29,6 +31,9 @@ const SignIn = () => {
             label="Username"
             variant="outlined"
             margin="dense"
+            onChange={e => {
+              setUserBody({ ...userBody, username: e.target.value });
+            }}
           />
           <TextField
             fullWidth
@@ -37,6 +42,9 @@ const SignIn = () => {
             type="password"
             variant="outlined"
             margin="dense"
+            onChange={e => {
+              setUserBody({ ...userBody, password: e.target.value });
+            }}
           />
           <Button
             style={{
@@ -45,6 +53,23 @@ const SignIn = () => {
               margin: "1.5rem 0 "
             }}
             variant="contained"
+            onClick={() => {
+              fetch("http://localhost:3000/admin/login", {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                  username: userBody.username,
+                  password: userBody.password
+                }
+              })
+                .then(response => {
+                  return response.json();
+                })
+                .then(data =>
+                  localStorage.setItem("token", "Bearer " + data.token)
+                );
+              window.location = "/signIn";
+            }}
           >
             Sign In
           </Button>
