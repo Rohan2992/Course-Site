@@ -75,7 +75,7 @@ const SignUp = () => {
                   if (data.message === "Admin already exists") {
                     setIsRegstered(true);
                   }
-                  localStorage.setItem("Authorization", "Bearer " + data.token);
+                  localStorage.setItem("token", "Bearer " + data.token);
                   // setData(data);
                 });
             }}
