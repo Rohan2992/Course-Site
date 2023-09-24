@@ -10,11 +10,13 @@ const NavMenu = () => {
   useEffect(function() {
     fetch("http://localhost:3000/admin/me", {
       method: "GET",
-      headers: { Authorization: localStorage.getItem("token") }
+      headers: { "Authorization": localStorage.getItem("token") }
     })
       .then(res => res.json())
       .then(d => {
-        setShowEmail(d?.user);
+        if(d.message !== "Authorization failed"){
+          setShowEmail(d?.user);
+        }
       });
   }, []);
 

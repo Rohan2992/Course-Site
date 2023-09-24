@@ -1,10 +1,11 @@
 import Card from "@mui/material/Card";
 import { TextField, Typography, Button } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const [userBody, setUserBody] = useState({ username: "", password: "" });
   return (
     <div
@@ -58,17 +59,17 @@ const SignIn = () => {
                 method: "POST",
                 headers: {
                   "content-type": "application/json",
-                  username: userBody.username,
-                  password: userBody.password
+                  "username": userBody.username,
+                  "password": userBody.password
                 }
               })
                 .then(response => {
                   return response.json();
                 })
-                .then(data =>
-                  localStorage.setItem("token", "Bearer " + data.token)
-                );
-              window.location = "/signIn";
+                .then(data => {
+                  localStorage.setItem("token", "Bearer " + data.token);
+                  navigate(0);
+                });
             }}
           >
             Sign In
