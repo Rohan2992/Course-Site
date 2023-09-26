@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 const NavMenu = () => {
   const [showEmail, setShowEmail] = useState(null);
-  console.log(showEmail);
+  // console.log(showEmail);
 
   useEffect(function() {
     fetch("http://localhost:3000/admin/me", {

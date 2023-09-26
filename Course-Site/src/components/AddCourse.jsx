@@ -5,7 +5,7 @@ const AddCourse = () => {
   const [course, setCourse] = useState({ title: "", description: "" });
   const [exist, setExist ] = useState(null);
 
-  console.log(course);
+  // console.log(course);
   return (
     <>
       <div
